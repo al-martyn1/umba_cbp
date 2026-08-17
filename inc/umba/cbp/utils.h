@@ -27,7 +27,11 @@ namespace utils {
 
 //--------------------------------------------------------------------------------------------------------------------
 inline
-std::string generateChromeUserDataFolderForProjectImpl(const std::string &folderRole, std::string projectPath, std::string browserName=std::string(), const std::string &projectSubfolder=std::string() /* if empty use temp folder */)
+std::string generateChromeUserDataFolderForProjectImpl( const std::string &folderRole // profile, cache etc
+                                                      , std::string projectPath
+                                                      , std::string browserName=std::string()
+                                                      , const std::string &projectSubfolder=std::string() // if empty use temp folder
+                                                      )
 {
     projectPath = umba::filename::makeCanonical(projectPath);
 
@@ -49,21 +53,25 @@ std::string generateChromeUserDataFolderForProjectImpl(const std::string &folder
 
 //--------------------------------------------------------------------------------------------------------------------
 inline
-std::string generateChromeUserProfileFolderForProject(std::string projectPath, std::string browserName=std::string(), const std::string &projectSubfolder=std::string() /* if empty use temp folder */)
+std::string generateChromeUserProfileFolderForProject( std::string projectPath
+                                                     , std::string browserName=std::string()
+                                                     , const std::string &projectSubfolder=std::string() // if empty use temp folder
+                                                     )
 {
     return generateChromeUserDataFolderForProjectImpl("profile", projectPath, browserName, projectSubfolder);
 }
 
 //--------------------------------------------------------------------------------------------------------------------
 inline
-std::string generateChromeUserCacheFolderForProject(std::string projectPath, std::string browserName=std::string(), const std::string &projectSubfolder=std::string() /* if empty use temp folder */)
+std::string generateChromeUserCacheFolderForProject( std::string projectPath
+                                                   , std::string browserName=std::string()
+                                                   , const std::string &projectSubfolder=std::string() // if empty use temp folder
+                                                   )
 {
     return generateChromeUserDataFolderForProjectImpl("cache", projectPath, browserName, projectSubfolder);
 }
 
-
-
-
+//--------------------------------------------------------------------------------------------------------------------
 
 
 
