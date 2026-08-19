@@ -77,6 +77,40 @@ std::string generateChromeUserCacheFolderForProject( std::string projectPath
 
 
 //--------------------------------------------------------------------------------------------------------------------
+/*
+    Порт можно потом проверить
+    http://localhost:SOME_PORT/json/version
+
+    {
+      "Browser": "Chrome/118.0.5993.88",
+      "Protocol-Version": "1.3",
+      "User-Agent": "...",
+      "V8-Version": "...",
+      "WebKit-Version": "...",
+      "webSocketDebuggerUrl": "...",
+      "userDataDir": "/home/user/.config/google-chrome/MyProfile"
+    }
+
+    и сравнить с тем, какой предполагается для данного порта. Если отличается - значит, произошла коллизия по порту.
+
+    Тогда рапортуем и выходим
+*/
+
+inline
+int generatePortNumberForProjectConnection(std::string projectPath, int startPort=9000, int range=1000)
+{
+    filename::stripLastPathSep(projectPath);
+
+    std::size_t h = std::hash<std::string>{}(projectPath);
+
+    return startPort + int(h%std::size_t(range));
+}
+
+//--------------------------------------------------------------------------------------------------------------------
+
+
+
+//--------------------------------------------------------------------------------------------------------------------
 
 } // namespace utils
 } // namespace chrome_devtools_protocol
